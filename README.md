@@ -39,6 +39,7 @@ The plugin define the JIRA info by adding 3 property to
 ```xl-rules-sample.xml```
 
 ```
+
  <rule name="xl.DeployToProduction.checkJira" scope="pre-plan">
     <conditions>
       <expression>specification.deployedOrPreviousApplication.environment.requiresChangeTicketNumber</expression>
