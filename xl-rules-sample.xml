@@ -3,7 +3,7 @@
     Note: If you modify this file and automatic reloading is disabled in `planner.conf`, you must restart the XL Deploy server.
 -->
 <rules xmlns="http://www.xebialabs.com/xl-deploy/xl-rules">
-   <rule name="xl.DeployToProduction.checkJira" scope="pre-plan">
+  <rule name="xl.DeployToProduction.checkJira" scope="pre-plan">
     <conditions>
       <expression>specification.deployedOrPreviousApplication.environment.requiresChangeTicketNumber</expression>
     </conditions>
@@ -22,7 +22,7 @@
     </steps>
   </rule>
 
-<rule name="xl.DeployToProduction.updateJira" scope="post-plan">
+  <rule name="xl.DeployToProduction.updateJira" scope="post-plan">
     <conditions>
       <expression>specification.deployedOrPreviousApplication.environment.requiresChangeTicketNumber</expression>
     </conditions>
@@ -30,16 +30,29 @@
       <jython>
         <description expression="true">"update The [%s] Ticket status" % (specification.deployedOrPreviousApplication.version.satisfiesChangeTicketNumber)</description>
         <order>10</order>
-        <script-path>xld/jira/update.py</script-path>
+        <script-path>xld/jira/transition.py</script-path>
         <jython-context>
           <jira expression="true">specification.deployedOrPreviousApplication.version.satisfiesChangeTicketNumber</jira>
           <url expression="true">specification.deployedOrPreviousApplication.environment.jiraUrl</url>
           <username expression="true">specification.deployedOrPreviousApplication.environment.jiraUsername</username>
           <password expression="true">specification.deployedOrPreviousApplication.environment.jiraPassword</password>
           <next_transition_name>Ready for PROD</next_transition_name>
-          <next_transition_message>Automaticaly Commented by XLDeploy</next_transition_message>
         </jython-context>
       </jython>
+      <jython>
+        <description expression="true">"Add a comment to [%s] ticket" % (specification.deployedOrPreviousApplication.version.satisfiesChangeTicketNumber)</description>
+        <order>10</order>
+        <script-path>xld/jira/comment.py</script-path>
+        <jython-context>
+          <jira expression="true">specification.deployedOrPreviousApplication.version.satisfiesChangeTicketNumber</jira>
+          <url expression="true">specification.deployedOrPreviousApplication.environment.jiraUrl</url>
+          <username expression="true">specification.deployedOrPreviousApplication.environment.jiraUsername</username>
+          <password expression="true">specification.deployedOrPreviousApplication.environment.jiraPassword</password>
+          <next_transition_name>Ready for PROD</next_transition_name>
+          <message>Automaticaly Commented by XLDeploy 5.1.1</message>
+        </jython-context>
+      </jython>
+
     </steps>
   </rule>
 

@@ -10,4 +10,6 @@ communicator = communicator.JiraCommunicator(url,username, password)
 if not communicator.issue_exists(jira):
     raise ValueError("[%s] Not Found in %s" % (jira, communicator))
 
+communicator.add_comment(jira, message)
+
 print "Done."

@@ -13,7 +13,7 @@ from urlparse import urlparse
 class JiraCommunicator:
     """ Jira Communicator using REST API """
 
-    def __init__(self, endpoint='http://localhost:4516', username='admin', password='admin', apiVersion='latest'):
+    def __init__(self, endpoint='http://my.atlansian.net:8080', username='admin', password='admin', apiVersion='latest'):
         self.endpoint = endpoint
         self.username = username
         self.password = password
@@ -25,7 +25,10 @@ class JiraCommunicator:
             self.do_get("/rest/api/%s/issue/%s" % (self.apiVersion,jira))
             print "Jira Issue [%s] exists" % jira
             return True
-        except:
+        except ValueError:
+            return False
+        except Exception as ex:
+            print "Unexpected error:", sys.exc_info()[0]
             return False
 
     def get_issue(self,jira):
@@ -37,14 +40,14 @@ class JiraCommunicator:
     def update_transition_issue(self,jira,doc):
         return self.do_post_no_parse("/rest/api/%s/issue/%s/transitions" % (self.apiVersion,jira), doc)
 
-    def update_comment(self,jira,comment):
+    def add_comment(self,jira,comment):
         print "Update comment %s : %s " % (jira,comment)
         commentData = {
                 "body": comment
                 }
         return self.do_post_no_parse("/rest/api/%s/issue/%s/comment" % (self.apiVersion,jira), json.dumps(commentData) )
 
-    def move_issue_to_transistion(self,jira, transition_name, transition_message):
+    def move_issue_to_transistion(self,jira, transition_name ):
         jira_data_transitions = self.get_transitions_issue(jira)
         next_transitions = filter(lambda t: t['name'] == transition_name, jira_data_transitions['transitions'])
         if len(next_transitions) > 0:
@@ -60,8 +63,6 @@ class JiraCommunicator:
                 }
 
         self.update_transition_issue(jira,json.dumps(transitionData))
-
-        self.update_comment(jira, transition_message )
 
     def do_get(self, path):
         return self.do_it("GET", path, "")
