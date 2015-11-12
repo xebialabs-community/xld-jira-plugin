@@ -38,8 +38,7 @@ The plugin define the JIRA info by adding 3 property to
 
 ```xl-rules-sample.xml```
 
-```
-
+```xml
  <rule name="xl.DeployToProduction.checkJira" scope="pre-plan">
     <conditions>
       <expression>specification.deployedOrPreviousApplication.environment.requiresChangeTicketNumber</expression>
@@ -58,7 +57,6 @@ The plugin define the JIRA info by adding 3 property to
       </jython>
     </steps>
   </rule>
-
   <rule name="xl.DeployToProduction.updateJira" scope="post-plan">
     <conditions>
       <expression>specification.deployedOrPreviousApplication.environment.requiresChangeTicketNumber</expression>
@@ -89,10 +87,8 @@ The plugin define the JIRA info by adding 3 property to
           <message>Automaticaly Commented by XLDeploy 5.1.1</message>
         </jython-context>
       </jython>
-
     </steps>
   </rule>
-
 ```
 
 
