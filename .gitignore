@@ -6,3 +6,8 @@
 pom.xml
 build
 .idea
+build/
+.gradle/
+*.iml
+*.ipr
+*.iws
