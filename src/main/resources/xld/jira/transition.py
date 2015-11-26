@@ -6,9 +6,9 @@
 
 from xld.jira.jiracommunicator import communicator
 
-communicator = communicator.JiraCommunicator(server.url, server.username, server.password)
+communicator = communicator.JiraCommunicator(server.url, server.username, server.password, server.apiVersion)
 if not communicator.issue_exists(jira):
     raise ValueError("[%s] Not Found in %s" % (jira, communicator))
-communicator.move_issue_to_transistion(jira,next_transition_name )
+communicator.move_issue_to_transistion(jira, next_transition_name)
 
 print "Done."

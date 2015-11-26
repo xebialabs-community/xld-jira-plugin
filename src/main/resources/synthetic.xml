@@ -12,6 +12,7 @@
         <property name="url"/>
         <property name="username"/>
         <property name="password" password="true"/>
+        <property name="apiVersion" default="latest"/>
     </type-modification>
 
     <type-modification type="udm.Environment">
