@@ -5,12 +5,17 @@
     FOR A PARTICULAR PURPOSE. THIS CODE AND INFORMATION ARE NOT SUPPORTED BY XEBIALABS.
 
 -->
-<synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd" xmlns="http://www.xebialabs.com/deployit/synthetic" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<synthetic xsi:schemaLocation="http://www.xebialabs.com/deployit/synthetic synthetic.xsd" xmlns="http://www.xebialabs.com/deployit/synthetic"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-  <type-modification type="udm.Environment">
-    <property name="jiraUrl" required="false" category="JIRA"/>
-    <property name="jiraUsername" required="false" category="JIRA"/>
-    <property name="jiraPassword" password="true" required="false" category="JIRA"/>
-  </type-modification>
+    <type-modification type="jira.Server">
+        <property name="url"/>
+        <property name="username"/>
+        <property name="password" password="true"/>
+    </type-modification>
+
+    <type-modification type="udm.Environment">
+        <property name="jiraServer" category="JIRA" required="false" kind="ci" referenced-type="jira.Server"/>
+    </type-modification>
 
 </synthetic>

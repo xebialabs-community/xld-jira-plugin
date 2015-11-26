@@ -27,14 +27,11 @@ Place the plugin JAR file into your `SERVER_HOME/plugins` directory.
 
 # Usage #
 
-This is a sample of rules that are using the steps defined in this
-plugin.
+This is a sample of rules that are using the steps defined in this plugin.
 
-The rules are using the sample configuration define in the Release
-Dashboard documentation : https://docs.xebialabs.com/xl-deploy/how-to/configure-the-release-dashboard.html. The target environment requires a Change Ticket Number.
+The rules are using the sample configuration define in the Release Dashboard documentation : https://docs.xebialabs.com/xl-deploy/how-to/configure-the-release-dashboard.html. The target environment requires a Change Ticket Number.
 
-The plugin define the JIRA info by adding 3 property to
-`udm.Environment` CI.
+The plugin defines the JIRA information (url, username, password) in the 'Configuration' Node and add 1 property to `udm.Environment` CI.
 
 ```xl-rules-sample.xml```
 
@@ -50,9 +47,7 @@ The plugin define the JIRA info by adding 3 property to
         <script-path>xld/jira/check.py</script-path>
         <jython-context>
           <jira expression="true">specification.deployedOrPreviousApplication.version.satisfiesChangeTicketNumber</jira>
-          <url expression="true">specification.deployedOrPreviousApplication.environment.jiraUrl</url>
-          <username expression="true">specification.deployedOrPreviousApplication.environment.jiraUsername</username>
-          <password expression="true">specification.deployedOrPreviousApplication.environment.jiraPassword</password>
+          <server expression="true">specification.deployedOrPreviousApplication.environment.jiraServer</server>          
         </jython-context>
       </jython>
     </steps>
@@ -68,9 +63,7 @@ The plugin define the JIRA info by adding 3 property to
         <script-path>xld/jira/transition.py</script-path>
         <jython-context>
           <jira expression="true">specification.deployedOrPreviousApplication.version.satisfiesChangeTicketNumber</jira>
-          <url expression="true">specification.deployedOrPreviousApplication.environment.jiraUrl</url>
-          <username expression="true">specification.deployedOrPreviousApplication.environment.jiraUsername</username>
-          <password expression="true">specification.deployedOrPreviousApplication.environment.jiraPassword</password>
+          <server expression="true">specification.deployedOrPreviousApplication.environment.jiraServer</server>
           <next_transition_name>Ready for PROD</next_transition_name>
         </jython-context>
       </jython>
@@ -80,11 +73,8 @@ The plugin define the JIRA info by adding 3 property to
         <script-path>xld/jira/comment.py</script-path>
         <jython-context>
           <jira expression="true">specification.deployedOrPreviousApplication.version.satisfiesChangeTicketNumber</jira>
-          <url expression="true">specification.deployedOrPreviousApplication.environment.jiraUrl</url>
-          <username expression="true">specification.deployedOrPreviousApplication.environment.jiraUsername</username>
-          <password expression="true">specification.deployedOrPreviousApplication.environment.jiraPassword</password>
-          <next_transition_name>Ready for PROD</next_transition_name>
-          <message>Automaticaly Commented by XLDeploy 5.1.1</message>
+          <server expression="true">specification.deployedOrPreviousApplication.environment.jiraServer</server>          
+          <message>Automatically Commented by XLDeploy 5.1.1</message>
         </jython-context>
       </jython>
     </steps>

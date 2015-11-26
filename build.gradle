@@ -7,13 +7,37 @@ buildscript {
   }
 }
 
+repositories {
+  mavenLocal()
+    mavenCentral()
+    maven {
+      url 'https://dist.xebialabs.com/public/maven2'
+    }
+  maven {
+    url 'http://www.knopflerfish.org/maven2'
+  }
+
+
+}
+
 version='4.5.1'
+def apiVersion = '2015.2.7'
 
 apply plugin: "com.github.hierynomus.license"
 apply plugin: 'java'
 apply plugin: 'idea'
 
 license {
-    header rootProject.file('src/main/license/xebialabs_community.license')
+  header rootProject.file('src/main/license/xebialabs_community.license')
     strictCheck true
+}
+
+dependencies {
+  compile "com.xebialabs.deployit:udm-plugin-api:$apiVersion"
+    compile "com.xebialabs.deployit:engine-spi:$apiVersion"
+    compile "com.xebialabs.deployit:engine-api:$apiVersion"
+    compile "com.xebialabs.deployit:appserver-api:$apiVersion"
+    compile 'com.esotericsoftware.yamlbeans:yamlbeans:1.09'
+    compile 'com.google.guava:guava:18.0'
+    compile "junit:junit:4.11"
 }
