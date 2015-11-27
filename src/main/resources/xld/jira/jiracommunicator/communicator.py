@@ -10,6 +10,7 @@ import httplib
 import json
 from urlparse import urlparse
 
+
 class JiraCommunicator:
     """ Jira Communicator using REST API """
 
@@ -19,11 +20,15 @@ class JiraCommunicator:
         self.password = password
         self.apiVersion = apiVersion
 
+    def test_connection(self):
+        print "Testing connection with JIRA Server...."
+        self.do_get("/rest/api/test")
+
     def issue_exists(self,jira):
         print "Check Jira Issue [%s]" % jira
         try:
             self.do_get("/rest/api/%s/issue/%s" % (self.apiVersion,jira))
-            print "Jira Issue [%s] exists" % jira
+            print "JIRA issue [%s] exists" % jira
             return True
         except ValueError:
             return False
@@ -53,16 +58,16 @@ class JiraCommunicator:
         if len(next_transitions) > 0:
             next_transition = next_transitions[0]
         else:
-            raise ValueError('Transistion [%s] not found' % transition_name)
+            raise ValueError('Transition [%s] not found for %s ' % (transition_name, jira))
 
         print "Performing transition %s " % (transition_name)
-        transitionData = {
+        transition_data = {
                 "transition": {
                     "id": next_transition['id']
                     }
                 }
 
-        self.update_transition_issue(jira,json.dumps(transitionData))
+        self.update_transition_issue(jira,json.dumps(transition_data))
 
     def do_get(self, path):
         return self.do_it("GET", path, "")
@@ -96,7 +101,7 @@ class JiraCommunicator:
             response = conn.getresponse()
             #print response.status, response.reason
             if response.status != 200 and response.status != 204 and response.status !=201:
-                raise Exception("Error when requesting XL Deploy Server [%s]:%s" % (response.status, response.reason))
+                raise Exception("Error when requesting remote url %s [%s]:%s" % (path,  response.status, response.reason))
 
             if parse_response:
                 data = str(response.read())
@@ -109,4 +114,5 @@ class JiraCommunicator:
 
     def __str__(self):
         return "[endpoint=%s, username=%s]" % (self.endpoint, self.username)
+
 

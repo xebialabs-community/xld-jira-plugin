@@ -13,6 +13,7 @@
         <property name="username"/>
         <property name="password" password="true"/>
         <property name="apiVersion" default="latest"/>
+        <method name="checkConnection" label="Check Connection" delegate="jythonScript" script="xld/jira/check-connection.py" task-description="Check connection"/>
     </type-modification>
 
     <type-modification type="udm.Environment">
