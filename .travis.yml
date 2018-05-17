@@ -7,7 +7,9 @@ deploy:
   provider: releases
   api_key:
     secure: Wz10M1WC2m8gt+JypTLbKDd53QIVWrrXIP+CI4cyIMODC0GhlMDhUvRGK83tDWzBMSrLvGjhe1LvO1MxRFdX6gBaJN+C62ABlw/BjWru8OB8xk8UMo5oKlTqu6ElotnONyKXLKJLG65PXiePE1E4rHplw7T/CpGPsS9lgLIWW5x/nW1unhKQrz3pZh/wORIS6JgUw/GcwuS/bgn8zjRi+HoAFrO9Oo0fz6OqY/z9LRj6sjqeIIBX9F12XE/yM2d9D5+nMjZrXwzws63otuDMEoNqZcSH+xoe4c38SuXPpam8li77ITpMDbuuRe6DDfUC3QAqWVzuACwNBNFor9Bvgmp4Yb7FXy75ynwNKy54mMWc51IJOVbi2tgYTi3wUp4DonjQlvnG0C5Pk4vdxV7WtOfPsVSCCpQAWsCul/E5PZT25Kkr0xibB5RBscXvPP7cVSNEUaSpehsvkHqaUb2J9qEsFVrgNbJKS/S/wLDi4/lFVqMr3Fv2EfsE+W2AuUwZumxw3dOobx2zWo42huyMJ6gLbvqP8fW0jybV+ssG4z4aRsJ68eXRrmoRfDDe1LzaIWX2DKU9EFui/tlsi5BOEO/DG5sSgfKxUOzPfkI6oRCBcbhhZu83kRUg5yQyOTfm1tpxEi/tin8yXkC60CNyDkxFWY5zl5wKOZlq/fX1R/8=
-  file: build/libs//xld-jira-plugin-4.5.1.jar
+  file_glob: true
+  file: build/distributions/*
+  skip_cleanup: true
   on:
     all_branches: true
     tags: true

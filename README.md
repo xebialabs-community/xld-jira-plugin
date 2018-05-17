@@ -1,5 +1,14 @@
-# xld-jira-plugin
-Integration between JIRA and XL Deploy
+# XL Deploy Jira plugin
+
+[![Build Status][xld-jira-plugin-travis-image]][xld-jira-plugin-travis-url]
+[![License: MIT][xld-jira-plugin-license-image]][xld-jira-plugin-license-url]
+![Github All Releases][xld-jira-plugin-downloads-image]
+
+[xld-jira-plugin-travis-image]: https://travis-ci.org/xebialabs-community/xld-jira-plugin.svg?branch=master
+[xld-jira-plugin-travis-url]: https://travis-ci.org/xebialabs-community/xld-jira-plugin
+[xld-jira-plugin-license-image]: https://img.shields.io/badge/License-MIT-yellow.svg
+[xld-jira-plugin-license-url]: https://opensource.org/licenses/MIT
+[xld-jira-plugin-downloads-image]: https://img.shields.io/github/downloads/xebialabs-community/xld-jira-plugin/total.svg
 
 # Preface #
 
@@ -23,7 +32,8 @@ This plugin offers sample steps to
 
 # Installation #
 
-Place the plugin JAR file into your `SERVER_HOME/plugins` directory.
+* Copy the latest JAR or XLDP file from the [releases page](https://github.com/xebialabs-community/xld-jira-plugin/releases) into the `XL_DEPLOY_SERVER/plugins` directory.
+* Restart the XL Deploy server.
 
 # Usage #
 
